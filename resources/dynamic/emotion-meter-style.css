@@ -1,0 +1,18 @@
+.noUi-pips, .noUi-pips-horizontal {
+    {% IF (CurrentADC.PropValue("show_scale")  = "0") Then %}
+    	display:none;
+  	{% EndIF %}
+}
+
+.noUi-base {
+    {% IF (CurrentADC.PropValue("orientation")  = "horizontal") Then %}
+    background : linear-gradient(to right, {%= CurrentADC.PropValue("color") %});
+  	{% EndIF %}
+    {% IF (CurrentADC.PropValue("orientation")  = "vertical") Then %}
+    background : linear-gradient(to top, {%= CurrentADC.PropValue("color") %});
+  	{% EndIF %}
+}
+
+.noUi-connect {
+    background : {%= CurrentADC.PropValue("connect_color") %};
+}

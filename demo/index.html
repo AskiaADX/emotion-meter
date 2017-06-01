@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>ADC Demo</title>
+        <script type="text/javascript" src="../resources/shared/noUiSlider.10.0.0/nouislider.min.js"></script>
+        <script type="text/javascript" src="../resources/shared/wnumb-1.1.0/wNumb.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+        <script src="http://code.highcharts.com/modules/exporting.js"></script>
+        <link rel="stylesheet" href="../resources/shared/noUiSlider.10.0.0/nouislider.min.css">
+        <link rel="stylesheet" href="../resources/static/emotion-meter.css">
+    </head>
+    <body>
+        <style>
+            .noUi-pips, .noUi-pips-horizontal {
+                /*display : none;*/
+            }
+            
+            .noUi-base {
+             	background : linear-gradient(to right, green, yellow, red);
+            }
+            
+            .noUi-connect {
+                background : white;
+            }
+        </style>
+        <div id="adc_1">
+            <video id="video" autoplay><source src="powtoon-flhqAqlVe70.mp4" type="video/mp4"></video>
+            <div id="slider"></div>
+            <div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        </div>
+        <script>
+        </script>
+        <script src="../resources/static/emotion-meter.js"></script>
+        <script>
+            document.getElementById('video').addEventListener('loadeddata', function() {
+                init({
+                    start				: 50,
+                    connectLeft	   : false,
+                    connectRight : false,
+                    orientation		: 'horizontal',
+                    direction		 : 'ltr',
+                    tooltips		  : true,
+                    animate			 : true,
+                    animationDuration : 300,
+                    min				   : 0,
+                    max				   : 100,
+                    step				: 1,
+                    decimals	 	 : 0,
+                    separator 	     : '.',
+                    thousand	    : ' ',
+                    prefix		    	: '',
+                    suffix		    	: '',
+                    negative	      : '-',
+                    pipsDensity     : 1,
+                    graphTitle		 : 'Your reactions...',
+                    graphSub		: '',
+                    xTitle			    : 'Time',
+                    yTitle				: 'Intensity',
+                    data				: 'Intensity',
+                    timeInterval 	 : 1,
+                    timeTimeout	   : 10,
+                    message 		: "inactivite depuis %ss",
+                    showChart		: true,
+                    valueStop		 : 0,
+                    length			   : ""
+                });
+            });
+        </script>
+    </body>
+</html>

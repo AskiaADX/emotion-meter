@@ -1,0 +1,6 @@
+<div id="adc_{%= CurrentADC.InstanceId %}">
+    <video id="video" autoplay><source src="{%= CurrentADC.PropValue("source").toString() %}" type="video/mp4"></video>
+    <div id="slider"></div>
+    <div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+    <input type="hidden" id="{%= CurrentQuestion.InputName() %}" name="{%= CurrentQuestion.InputName() %}" />
+</div>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<control  xmlns="http://www.askia.com/2.1.0/ADCSchema"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://www.askia.com/2.1.0/ADCSchema https://raw.githubusercontent.com/AskiaADX/ADXSchema/2.1.0/ADCSchema.xsd"
+          version="2.1.0"
+          askiaCompat="5.4.2">
+  <info>
+    <name>emotion-meter</name>
+    <guid>06307def-0677-45cd-a823-97d29cd173c4</guid>
+    <version>1.0.0</version>
+    <date>2017-05-31</date>
+    <description><![CDATA[]]></description>
+    <company></company>
+    <author><![CDATA[]]></author>
+    <site></site>
+    <helpURL></helpURL>
+    <categories>
+      <category>General</category>
+    </categories>
+    <constraints>
+      <constraint on="questions" chapter="false" single="false" multiple="false" numeric="false" date="false" open="true" requireParentLoop="false" />
+      <constraint on="controls" responseblock="true" label="true" textbox="true" checkbox="true" listbox="true" radiobutton="true" />
+      <constraint on="responses" max="*" min="*" />
+    </constraints>
+  </info>
+  <outputs defaultOutput="emotion-meter">
+    <output id="emotion-meter">
+      <description><![CDATA[measure the live reaction of the person watching a video]]></description>
+      <condition><![CDATA[Browser.Support("Javascript")]]></condition>
+      <content fileName="emotion-meter.js" type="javascript" mode="static" position="head" />
+      <content fileName="emotion-meter.css" type="css" mode="static" position="head" />
+      <content fileName="wNumb.js" type="javascript" mode="static" position="head" />
+      <content fileName="nouislider.min.js" type="javascript" mode="static" position="head" />
+      <content fileName="nouislider.min.css" type="css" mode="static" position="head" />
+      <content fileName="highcharts.js" type="javascript" mode="static" position="head" />
+      <content fileName="exporting.js" type="javascript" mode="static" position="head" />
+      <content fileName="emotion-meter.html" type="html" mode="dynamic" position="placeholder" />
+      <content fileName="emotion-meter-style.css" type="css" mode="dynamic" position="head" />
+      <content fileName="emotion-meter-param.js" type="javascript" mode="dynamic" position="foot" />
+    </output>
+  </outputs>
+  <properties>
+    <category id="video" name="Video">
+      <property xsi:type="standardProperty" id="source" name="Source of the video" type="string" require="true" visible="true">
+        <description><![CDATA[Path to the video]]></description>
+        <value></value>
+      </property>
+    </category>
+    <category id="slider" name="Slider Properties">
+      <property xsi:type="standardProperty" id="start_value" name="Start Value" type="number" require="true" visible="true">
+        <description><![CDATA[The value of the position of the handle at the beginning of the page]]></description>
+        <value><![CDATA[50]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="connect_left" name="Connect the left side of the handle" type="boolean" require="true" visible="true">
+        <description><![CDATA[the left side of the handle will have other properties (see color connect)]]></description>
+        <value><![CDATA[false]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="connect_right" name="Connect the rightside of the handle" type="boolean" require="true" visible="true">
+        <description><![CDATA[the right side of the handle will have other properties (see color connect)]]></description>
+        <value><![CDATA[false]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="direction" name="Direction" type="string" require="true" visible="true">
+        <description><![CDATA[Direction of the slider]]></description>
+        <value><![CDATA[ltr]]></value>
+        <options>
+          <option value="rtl" text="RTL" />
+          <option value="ltr" text="LTR" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="orientation" name="Orientation" type="string" require="true" visible="true">
+        <description><![CDATA[Orientation of the slider]]></description>
+        <value><![CDATA[horizontal]]></value>
+        <options>
+          <option value="horizontal" text="Horizontal" />
+          <option value="vertical" text="Vertical" />
+        </options>
+      </property>
+      <property xsi:type="standardProperty" id="tooltips" name="Tooltips" type="boolean" require="false" visible="true">
+        <description><![CDATA[Display or no tooltips]]></description>
+        <value><![CDATA[true]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="animate" name="Animate" type="boolean" require="false" visible="true">
+        <description><![CDATA[Animate the slider when moving]]></description>
+        <value><![CDATA[true]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="anim_duration" name="Animation Duration (ms)" type="number" require="false" visible="true">
+        <description><![CDATA[The duration of the animation in ms]]></description>
+        <value><![CDATA[300]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="min" name="First Value" type="number" require="true" visible="true">
+        <description><![CDATA[The first value of the slider]]></description>
+        <value><![CDATA[0]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="max" name="Last Value" type="number" require="true" visible="true">
+        <description><![CDATA[The maximal value of the slider]]></description>
+        <value><![CDATA[100]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="step" name="Step" type="number" require="false" visible="true">
+        <description><![CDATA[The step between 2 values]]></description>
+        <value><![CDATA[1]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="density" name="Pips Density" type="number" require="false" visible="true">
+        <description><![CDATA[The density of pips of the scale]]></description>
+        <value><![CDATA[1]]></value>
+      </property>
+    </category>
+    <category id="slider_style" name="Slider Style">
+      <property xsi:type="standardProperty" id="show_scale" name="Show Scale" type="boolean" require="false" visible="true">
+        <description><![CDATA[Display or no the scale of the slider]]></description>
+        <value><![CDATA[true]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="length" name="Slider length" type="string" require="false" visible="true">
+        <description><![CDATA[The length of the slider (default in px but some unities can be given : rem, em, vw, %, px)]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="color" name="Colors gradiant" type="string" require="false" visible="true">
+        <description><![CDATA[Gradiant's colors of the slider (specified CSS compatible colors between ',')]]></description>
+        <value><![CDATA[green, yellow, red]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="connect_color" name="Connect Color" type="color" require="false" visible="true">
+        <description><![CDATA[The color of the connect bar]]></description>
+        <value><![CDATA[#FFF]]></value>
+      </property>
+    </category>
+    <category id="format" name="Number Format">
+      <property xsi:type="standardProperty" id="decimal_nbr" name="Decimal Number" type="number" require="false" visible="true">
+        <description><![CDATA[The number of decimal in slider values]]></description>
+        <value><![CDATA[0]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="decimal_separator" name="Decimal Separator" type="string" require="false" visible="true">
+        <description><![CDATA[The string or char used to separate real part and decimal part on a number]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="thousand_separator" name="Thousand Separator" type="string" require="false" visible="true">
+        <description><![CDATA[The string or char used to separate thousands part]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="prefix" name="Prefix" type="string" require="false" visible="true">
+        <description><![CDATA[The prefix of all values in the slider]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="postfix" name="Postfix" type="string" require="false" visible="true">
+        <description><![CDATA[The postfix of all values in the slider]]></description>
+        <value></value>
+      </property>
+      <property xsi:type="standardProperty" id="negatives_numbers" name="Negatives Mark" type="string" require="false" visible="true">
+        <description><![CDATA[The string or char used to show the number is under 0]]></description>
+        <value><![CDATA[-]]></value>
+      </property>
+    </category>
+    <category id="chart" name="Chart Properties">
+      <property xsi:type="standardProperty" id="show_chart" name="Display Chart" type="boolean" require="false" visible="true">
+        <description><![CDATA[Display or not chart]]></description>
+        <value><![CDATA[true]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="title" name="Title" type="string" require="false" visible="true">
+        <description><![CDATA[The title of the chart]]></description>
+        <value><![CDATA[Title]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="subtitle" name="Subtitle" type="string" require="false" visible="true">
+        <description><![CDATA[The subtitle of the chart]]></description>
+        <value><![CDATA[subtitle]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="x_axis" name="X value" type="string" require="false" visible="true">
+        <description><![CDATA[The name of the value on the X axis]]></description>
+        <value><![CDATA[Time]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="y_axis" name="Y value" type="string" require="false" visible="true">
+        <description><![CDATA[The name of the value in the Y axis]]></description>
+        <value><![CDATA[Data]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="data" name="Data" type="string" require="false" visible="true">
+        <description><![CDATA[The data measured]]></description>
+        <value><![CDATA[data measured]]></value>
+      </property>
+    </category>
+    <category id="control" name="Control Properties">
+      <property xsi:type="standardProperty" id="interval" name="Time save" type="number" require="false" visible="true">
+        <description><![CDATA[The time between every save (in s)]]></description>
+        <value><![CDATA[1]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="timeout" name="Time inactivity" type="number" require="false" visible="true">
+        <description><![CDATA[The number of second where we consider the user inactive (-1 to deactivate this feature)]]></description>
+        <value><![CDATA[-1]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="message" name="Message inactivity" type="string" require="false" visible="true">
+        <description><![CDATA[The message to display when the user is inactive. (%s to write the time activity)]]></description>
+        <value><![CDATA[Session inactive depuis %ss]]></value>
+      </property>
+      <property xsi:type="standardProperty" id="value_stop" name="Value Stop" type="number" require="false" visible="true">
+        <description><![CDATA[The value that when the user put the slider value equal or lower than it, it stop all script (-1 to remove the fonctionnality)]]></description>
+        <value><![CDATA[-1]]></value>
+      </property>
+    </category>
+  </properties>
+</control>
