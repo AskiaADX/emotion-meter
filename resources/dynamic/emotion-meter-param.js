@@ -29,6 +29,7 @@ document.getElementById('video').addEventListener('loadeddata', function() {
         showChart		: {%= CurrentADC.PropValue("show_chart") %},
         valueStop		 : {%= CurrentADC.PropValue("value_stop") %},
         length			   : '{%= CurrentADC.PropValue("length") %}',
-        inputName	   : '{%= CurrentQuestion.InputName() %}'
+        inputName	   : '{%= CurrentQuestion.InputName() %}',
+        controls		   : {%= CurrentADC.PropValue("controls") %}
     });
 });

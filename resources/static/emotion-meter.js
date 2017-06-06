@@ -135,21 +135,30 @@ function pause() {
 //Reactivate the control
 function play() {
     video.play();
-    interval = setInterval(saveEmote, options.timeInterval * 1000);
-    if (options.timeTimeout !== -1) {
-        timeout = setTimeout(inactive, options.timeTimeout * 1000);
+    if (chrono >= video.duration) {
+        interval = setInterval(saveEmote, options.timeInterval * 1000);
+        if (options.timeTimeout !== -1) {
+            timeout = setTimeout(inactive, options.timeTimeout * 1000);
+        }
     }
 }
 
 //Init function called in the dynamic js
 function init(optionsADC) {
+    optionsADC.connectLeft = (optionsADC.connectLeft)? true : false;
+    optionsADC.connectRight = (optionsADC.connectRight)? true : false;
+    optionsADC.tooltips = (optionsADC.tooltips)? true : false;
+    optionsADC.animate = (optionsADC.animate)? true : false;
+    optionsADC.showChart = (optionsADC.showChart)? true : false;
+    optionsADC.controls = (optionsADC.controls)? true : false;
+
     options = {
         start				: optionsADC.start || 50, //Number
         connect			 : [optionsADC.connectLeft, optionsADC.connectRight], // false, true, [bool, bool]
         orientation		: optionsADC.orientation || 'horizontal',//"vertical", "horizontal"
         direction		 : optionsADC.direction || 'ltr', //"ltr", "rtl"
-        tooltips		  : optionsADC.tooltips || true, //false, true
-        animate			 : optionsADC.animate || true, // false, true
+        tooltips		  : optionsADC.tooltips, //false, true
+        animate			 : optionsADC.animate, // false, true
         animationDuration	: optionsADC.animationDuration || 300, //ms
         min				   : optionsADC.min || 0,
         max				   : optionsADC.max || 100,
@@ -174,8 +183,10 @@ function init(optionsADC) {
         values			   : optionsADC.values || [],
         valueStop		: optionsADC.valueStop,
 		length			   : optionsADC.length,
-        inputName	  : optionsADC.inputName
+        inputName	  : optionsADC.inputName,
+        controls 		 : optionsADC.controls || false
     };
+
     //Recover slider and video
     slider = document.getElementById('slider');
     video = document.getElementById("video") || document.getElementById("audio");
@@ -232,11 +243,13 @@ function init(optionsADC) {
         pause();
     });
 
-    video.addEventListener('click', function() {
-        if (video.paused) {
-            play();
-        } else {
-			pause();
-        }
-    });
+    if (options.controls) {
+        video.addEventListener('click', function() {
+            if (video.paused) {
+                play();
+            } else {
+                pause();
+            }
+        });
+    }
 }

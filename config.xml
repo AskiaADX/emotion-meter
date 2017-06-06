@@ -53,6 +53,10 @@
           <option value="audio" text="Audio" />
         </options>
       </property>
+      <property xsi:type="standardProperty" id="controls" name="Controls" type="boolean" require="false" visible="true">
+        <description><![CDATA[add the control of the video (defaul html one)]]></description>
+        <value><![CDATA[true]]></value>
+      </property>
     </category>
     <category id="slider" name="Slider Properties">
       <property xsi:type="standardProperty" id="start_value" name="Start Value" type="number" require="true" visible="true">
