@@ -6,3 +6,7 @@
     display: block;
     margin: 0 auto;
 }
+
+.noUi-connect {
+    border-radius : 0px;
+}

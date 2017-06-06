@@ -1,5 +1,9 @@
 <div id="adc_{%= CurrentADC.InstanceId %}">
+    {% IF (CurrentADC.PropValue("nature")  = "video") Then %}
     <video id="video" autoplay><source src="{%= CurrentADC.PropValue("source").toString() %}" type="video/mp4"></video>
+    {% ElseIf (CurrentADC.PropValue("nature") = "audio") Then %}
+    <audio id="audio" autoplay><source src="{%= CurrentADC.PropValue("source").toString() %}" type="audio/wav"></audio>
+    {% EndIF %}
     <div id="slider"></div>
     <div id="chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
     <input type="hidden" id="{%= CurrentQuestion.InputName() %}" name="{%= CurrentQuestion.InputName() %}" />

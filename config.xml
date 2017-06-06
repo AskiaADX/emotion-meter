@@ -28,10 +28,10 @@
       <description><![CDATA[measure the live reaction of the person watching a video]]></description>
       <condition><![CDATA[Browser.Support("Javascript")]]></condition>
       <content fileName="emotion-meter.js" type="javascript" mode="static" position="head" />
-      <content fileName="emotion-meter.css" type="css" mode="static" position="head" />
+      <content fileName="nouislider.min.css" type="css" mode="static" position="head" />
       <content fileName="wNumb.js" type="javascript" mode="static" position="head" />
       <content fileName="nouislider.min.js" type="javascript" mode="static" position="head" />
-      <content fileName="nouislider.min.css" type="css" mode="static" position="head" />
+      <content fileName="emotion-meter.css" type="css" mode="static" position="head" />
       <content fileName="highcharts.js" type="javascript" mode="static" position="head" />
       <content fileName="exporting.js" type="javascript" mode="static" position="head" />
       <content fileName="emotion-meter.html" type="html" mode="dynamic" position="placeholder" />
@@ -45,6 +45,14 @@
         <description><![CDATA[Path to the video]]></description>
         <value></value>
       </property>
+      <property xsi:type="standardProperty" id="nature" name="Type of control" type="string" require="false" visible="true">
+        <description><![CDATA[Select the type of the element to rate]]></description>
+        <value><![CDATA[video]]></value>
+        <options>
+          <option value="video" text="Video" />
+          <option value="audio" text="Audio" />
+        </options>
+      </property>
     </category>
     <category id="slider" name="Slider Properties">
       <property xsi:type="standardProperty" id="start_value" name="Start Value" type="number" require="true" visible="true">
@@ -57,7 +65,7 @@
       </property>
       <property xsi:type="standardProperty" id="connect_right" name="Connect the rightside of the handle" type="boolean" require="true" visible="true">
         <description><![CDATA[the right side of the handle will have other properties (see color connect)]]></description>
-        <value><![CDATA[false]]></value>
+        <value><![CDATA[true]]></value>
       </property>
       <property xsi:type="standardProperty" id="direction" name="Direction" type="string" require="true" visible="true">
         <description><![CDATA[Direction of the slider]]></description>
@@ -115,7 +123,7 @@
       </property>
       <property xsi:type="standardProperty" id="color" name="Colors gradiant" type="string" require="false" visible="true">
         <description><![CDATA[Gradiant's colors of the slider (specified CSS compatible colors between ',')]]></description>
-        <value><![CDATA[green, yellow, red]]></value>
+        <value><![CDATA[red, yellow, green]]></value>
       </property>
       <property xsi:type="standardProperty" id="connect_color" name="Connect Color" type="color" require="false" visible="true">
         <description><![CDATA[The color of the connect bar]]></description>

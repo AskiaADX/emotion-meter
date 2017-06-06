@@ -99,9 +99,9 @@ function saveEmote() {
     //add to the chrono the time of an interval
     chrono += options.timeInterval;
 
-    //If the video is finish, clear all and display the graph
+    //If the video or audio is finish, clear all and display the graph
     if (chrono >= video.duration) {
-        //Pause the video if the event come from the stop value
+        //Pause the video or audio if the event come from the stop value
         video.pause();
         //Clear all timer
         clearInterval(interval);
@@ -110,7 +110,7 @@ function saveEmote() {
         if (options.showChart) {
             createChart();
         }
-        
+
         document.getElementById(options.inputName).value = options.values.join(";");
         // remove the event from the slider
         slider.noUiSlider.off('slide');
@@ -123,6 +123,22 @@ function resetTimer() {
     clearTimeout(timeout);
     //then reset it
     timeout = setTimeout(inactive, options.timeTimeout * 1000);
+}
+
+//Pause the control when pause the video or when lost focus of the tab
+function pause() {
+    video.pause();
+    clearInterval(interval);
+    clearTimeout(timeout);
+}
+
+//Reactivate the control
+function play() {
+    video.play();
+    interval = setInterval(saveEmote, options.timeInterval * 1000);
+    if (options.timeTimeout !== -1) {
+        timeout = setTimeout(inactive, options.timeTimeout * 1000);
+    }
 }
 
 //Init function called in the dynamic js
@@ -162,7 +178,7 @@ function init(optionsADC) {
     };
     //Recover slider and video
     slider = document.getElementById('slider');
-    video = document.getElementById("video");
+    video = document.getElementById("video") || document.getElementById("audio");
     
     //Create the slider with options object
     createSlider();
@@ -207,4 +223,20 @@ function init(optionsADC) {
     if (options.timeTimeout !== -1) {
         timeout = setTimeout(inactive, options.timeTimeout * 1000);
     }
+
+    window.addEventListener('focus', function() {
+        play();
+    });
+
+    window.addEventListener('blur', function() {
+        pause();
+    });
+
+    video.addEventListener('click', function() {
+        if (video.paused) {
+            play();
+        } else {
+			pause();
+        }
+    });
 }
