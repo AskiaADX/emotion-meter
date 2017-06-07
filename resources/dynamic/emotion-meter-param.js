@@ -1,4 +1,5 @@
-document.getElementById('video').addEventListener('loadeddata', function() {
+var video = document.getElementById("video") || document.getElementById("audio");
+video.addEventListener('loadeddata', function() {
     init({
         start				: {%= CurrentADC.PropValue("start_value") %},
         connectLeft	   : {%= CurrentADC.PropValue("connect_left") %},

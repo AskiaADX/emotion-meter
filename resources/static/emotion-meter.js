@@ -190,7 +190,7 @@ function init(optionsADC) {
     //Recover slider and video
     slider = document.getElementById('slider');
     video = document.getElementById("video") || document.getElementById("audio");
-    
+
     //Create the slider with options object
     createSlider();
     //If the personne is active, reset the timeout
@@ -213,6 +213,9 @@ function init(optionsADC) {
     //if the length of the slider is not specified, take the length of the video
     if (!options.length) {
         options.length = video.clientWidth.toString();
+        if (options.length === "0") {
+            options.length = "300px";
+        }
     }
    	//Check if the length has the correct value with unity
     //Default is px
